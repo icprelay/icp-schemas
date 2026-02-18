@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "eventId": "550e8400-e29b-41d4-a716-446655440000",
+  "correlationId": "550e8400-e29b-41d4-a716-446655440001",
+  "source": "falcony",
+  "eventType": "observation.created",
+  "subject": {
+    "type": "observation",
+    "id": "obs-12345"
+  },
+  "occurredAtUtc": "2024-01-15T14:30:00.000Z",
+  "data": {
+    "title": "Safety Issue Reported",
+    "description": "Potential hazard identified in construction zone",
+    "severity": "high",
+    "location": {
+      "lat": 60.1699,
+      "lon": 24.9384
+    }
+  }
+}

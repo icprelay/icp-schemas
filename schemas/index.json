@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ICP Relay Schemas Index",
+  "description": "Index of all available ICP Relay event schemas",
+  "version": "1.0.0",
+  "schemas": {
+    "events": {
+      "v1": {
+        "canonical-event": {
+          "description": "Canonical event schema for standardized ICP Relay events",
+          "path": "./events/v1/canonical-event.schema.json",
+          "version": "1.0.0"
+        },
+        "stored-event": {
+          "description": "Stored event envelope schema with persistence and routing metadata",
+          "path": "./events/v1/stored-event.schema.json",
+          "version": "1.0.0"
+        }
+      }
+    }
+  }
+}

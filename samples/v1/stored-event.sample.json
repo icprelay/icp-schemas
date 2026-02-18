@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "correlationId": "550e8400-e29b-41d4-a716-446655440001",
+  "source": {
+    "system": "falcony",
+    "environment": "prod",
+    "senderId": "webhook-install-123"
+  },
+  "receivedAtUtc": "2024-01-15T14:30:00.500Z",
+  "raw": {
+    "payloadRef": "blob://storage/webhooks/2024/01/15/payload-550e8400.json",
+    "hashSha256": "abc123def456789...",
+    "contentType": "application/json",
+    "sizeBytes": 2048
+  },
+  "canonical": {
+    "schemaVersion": "1.0",
+    "eventId": "550e8400-e29b-41d4-a716-446655440000",
+    "source": "falcony",
+    "eventType": "observation.created",
+    "subject": {
+      "type": "observation",
+      "id": "obs-12345"
+    },
+    "occurredAtUtc": "2024-01-15T14:30:00.000Z",
+    "data": {
+      "title": "Safety Issue Reported",
+      "severity": "high"
+    }
+  },
+  "normalized": {
+    "schemaVersion": "1.0",
+    "eventId": "550e8400-e29b-41d4-a716-446655440000",
+    "source": "falcony",
+    "eventType": "observation.created",
+    "subject": {
+      "type": "observation",
+      "id": "obs-12345"
+    },
+    "occurredAtUtc": "2024-01-15T14:30:00.000Z",
+    "data": {
+      "title": "Safety Issue Reported",
+      "severity": "high"
+    }
+  },
+  "routing": {
+    "targets": [
+      {
+        "targetType": "teams",
+        "state": "succeeded",
+        "attempts": 1,
+        "lastAttemptAtUtc": "2024-01-15T14:30:02.000Z"
+      },
+      {
+        "targetType": "sharepoint",
+        "state": "pending",
+        "attempts": 0
+      }
+    ]
+  },
+  "tags": ["safety", "construction", "high-priority"]
+}
