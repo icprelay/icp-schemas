@@ -77,53 +77,7 @@
       },
       "canonical": {
         "description": "Canonical event representation conforming to the ICP Relay CanonicalEvent schema.",
-        "type": "object",
-        "additionalProperties": true
-      },
-      "normalized": {
-        "description": "Normalized event representation used by notifications and routing. Compatible with ICP Lite NotificationEvent fields.",
-        "type": "object",
-        "additionalProperties": true
-      },
-      "routing": {
-        "type": "object",
-        "description": "Optional routing state and delivery attempts.",
-        "additionalProperties": false,
-        "properties": {
-          "targets": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["targetType", "state"],
-              "properties": {
-                "targetType": {
-                  "type": "string",
-                  "description": "Target type (e.g., 'teams', 'sms', 'rest', 'sharepoint').",
-                  "maxLength": 32
-                },
-                "state": {
-                  "type": "string",
-                  "description": "Delivery state.",
-                  "enum": ["pending", "succeeded", "failed", "skipped"]
-                },
-                "attempts": {
-                  "type": "integer",
-                  "minimum": 0
-                },
-                "lastAttemptAtUtc": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "lastError": {
-                  "type": "string",
-                  "maxLength": 4000
-                }
-              }
-            },
-            "maxItems": 64
-          }
-        }
+        "$ref": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.0/schemas/events/v1/canonical-event.schema.json"
       },
       "tags": {
         "type": "array",
