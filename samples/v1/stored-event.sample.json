@@ -1,24 +1,62 @@
 {
-  "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "eventType": "canister.created",
-  "timestamp": "2024-01-15T14:30:00.000Z",
+  "schemaVersion": "1.0",
+  "correlationId": "550e8400-e29b-41d4-a716-446655440001",
   "source": {
-    "canisterId": "rrkah-fqaaa-aaaaa-aaaaq-cai",
-    "subnet": "pzp6e-ekpqk-3c5x7-2h6so-njoeq-mt45d-h3h6c-q3mxf-vpeq5-fk5o7-yae"
+    "system": "falcony",
+    "environment": "prod",
+    "senderId": "webhook-install-123"
   },
-  "data": {
-    "controllers": [
-      "2vxsx-fae"
-    ],
-    "modulehash": "0x5d0e0f0a0b0c0d0e0f0a0b0c0d0e0f0a0b0c0d0e0f0a0b0c0d0e0f0a0b0c0d0e",
-    "cycles": 3000000000000
+  "receivedAtUtc": "2024-01-15T14:30:00.500Z",
+  "raw": {
+    "payloadRef": "blob://storage/webhooks/2024/01/15/payload-550e8400.json",
+    "hashSha256": "abc123def456789...",
+    "contentType": "application/json",
+    "sizeBytes": 2048
   },
-  "metadata": {
-    "version": "1.0.0",
-    "correlationId": "550e8400-e29b-41d4-a716-446655440001"
+  "canonical": {
+    "schemaVersion": "1.0",
+    "eventId": "550e8400-e29b-41d4-a716-446655440000",
+    "source": "falcony",
+    "eventType": "observation.created",
+    "subject": {
+      "type": "observation",
+      "id": "obs-12345"
+    },
+    "occurredAtUtc": "2024-01-15T14:30:00.000Z",
+    "data": {
+      "title": "Safety Issue Reported",
+      "severity": "high"
+    }
   },
-  "storedAt": "2024-01-15T14:30:01.234Z",
-  "status": "processed",
-  "processedAt": "2024-01-15T14:30:05.678Z",
-  "retryCount": 0
+  "normalized": {
+    "schemaVersion": "1.0",
+    "eventId": "550e8400-e29b-41d4-a716-446655440000",
+    "source": "falcony",
+    "eventType": "observation.created",
+    "subject": {
+      "type": "observation",
+      "id": "obs-12345"
+    },
+    "occurredAtUtc": "2024-01-15T14:30:00.000Z",
+    "data": {
+      "title": "Safety Issue Reported",
+      "severity": "high"
+    }
+  },
+  "routing": {
+    "targets": [
+      {
+        "targetType": "teams",
+        "state": "succeeded",
+        "attempts": 1,
+        "lastAttemptAtUtc": "2024-01-15T14:30:02.000Z"
+      },
+      {
+        "targetType": "sharepoint",
+        "state": "pending",
+        "attempts": 0
+      }
+    ]
+  },
+  "tags": ["safety", "construction", "high-priority"]
 }

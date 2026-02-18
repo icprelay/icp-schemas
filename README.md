@@ -1,10 +1,10 @@
 # ICP Schemas
 
-JSON schemas for ICP (Internet Computer Protocol) event standardization and validation.
+JSON schemas for ICP Relay event standardization and validation.
 
 ## Overview
 
-This repository contains JSON Schema definitions for standardizing events in the Internet Computer Protocol ecosystem. The schemas ensure consistent event structure across different services and applications.
+This repository contains JSON Schema definitions for standardizing events in the ICP Relay ecosystem. The schemas ensure consistent event structure across different webhook sources and notification targets.
 
 ## Directory Structure
 
@@ -27,63 +27,74 @@ icprelay-schemas/
 
 ### Canonical Event (`canonical-event.schema.json`)
 
-Defines the standard structure for ICP blockchain events. This schema includes:
+Defines the standard structure for ICP Relay canonical events. This schema includes:
+- **schemaVersion**: Schema version (e.g., "1.0")
 - **eventId**: Unique identifier (UUID format)
-- **eventType**: Type of event (e.g., `canister.created`, `transaction.completed`)
-- **timestamp**: ISO 8601 timestamp when the event occurred
-- **source**: Information about the event source (canister ID, subnet)
-- **data**: Event-specific payload
-- **metadata**: Additional metadata (version, correlation ID)
+- **correlationId**: Optional correlation identifier for tracing
+- **source**: Source system identifier (e.g., "falcony", "jira")
+- **eventType**: Type of event (e.g., `observation.created`, `issue.updated`)
+- **subject**: Optional subject information (type and id)
+- **occurredAtUtc**: ISO 8601 timestamp when the event occurred
+- **data**: Event-specific payload (flexible object)
 
 ### Stored Event (`stored-event.schema.json`)
 
-Extends the canonical event with persistence metadata. Additional fields include:
-- **storedAt**: Timestamp when the event was persisted
-- **status**: Processing status (`pending`, `processed`, `failed`, `archived`)
-- **processedAt**: Timestamp when the event was processed
-- **retryCount**: Number of processing retry attempts
-- **error**: Error information if processing failed
+Defines the envelope structure for stored events in ICP Relay. This wraps the canonical event with additional persistence and routing metadata:
+- **schemaVersion**: Envelope schema version
+- **correlationId**: Optional correlation identifier
+- **source**: Source system information (system, environment, senderId)
+- **receivedAtUtc**: Timestamp when webhook was received
+- **raw**: Reference to raw webhook payload in blob storage
+  - **payloadRef**: Blob storage reference
+  - **hashSha256**: SHA-256 hash of payload
+  - **contentType**: Content type (e.g., "application/json")
+  - **sizeBytes**: Payload size in bytes
+- **canonical**: The canonical event representation
+- **normalized**: Normalized event for notifications (compatible with ICP Lite)
+- **routing**: Routing state and delivery attempts
+  - **targets**: Array of delivery targets with state tracking
+- **tags**: Optional tags for filtering and grouping
 
 ## Usage
 
 ### Validating Events
 
-You can use any JSON Schema validator to validate events against these schemas. Example using `ajv`:
+You can use any JSON Schema validator to validate events against these schemas. Example using `jsonschema` (Python):
 
-```javascript
-const Ajv = require('ajv');
-const ajv = new Ajv();
+```python
+import json
+from jsonschema import validate
 
-const canonicalSchema = require('./schemas/events/v1/canonical-event.schema.json');
-const validate = ajv.compile(canonicalSchema);
+# Load schema
+with open('schemas/events/v1/canonical-event.schema.json') as f:
+    schema = json.load(f)
 
-const event = {
-  eventId: "550e8400-e29b-41d4-a716-446655440000",
-  eventType: "canister.created",
-  timestamp: "2024-01-15T14:30:00.000Z",
-  source: {
-    canisterId: "rrkah-fqaaa-aaaaa-aaaaq-cai"
-  }
-};
+# Validate event
+event = {
+    "schemaVersion": "1.0",
+    "eventId": "550e8400-e29b-41d4-a716-446655440000",
+    "source": "falcony",
+    "eventType": "observation.created",
+    "occurredAtUtc": "2024-01-15T14:30:00.000Z",
+    "data": {}
+}
 
-const valid = validate(event);
-if (!valid) console.log(validate.errors);
+validate(instance=event, schema=schema)
 ```
 
 ### Sample Files
 
 Sample files are provided in the `samples/` directory to demonstrate valid event structures:
-- `canonical-event.sample.json`: Example of a canonical event
-- `stored-event.sample.json`: Example of a stored event with persistence metadata
+- `canonical-event.sample.json`: Example of a canonical event from Falcony
+- `stored-event.sample.json`: Example of a stored event envelope with routing information
 
-## Event Types
+## Event Flow
 
-Currently supported event types:
-- `canister.created`: New canister creation
-- `canister.updated`: Canister update
-- `canister.deleted`: Canister deletion
-- `transaction.completed`: Transaction completion
-- `cycle.transfer`: Cycle transfer between canisters
+1. **Webhook Received**: External system sends webhook to ICP Relay
+2. **Raw Storage**: Complete payload stored in blob storage
+3. **Canonical Transform**: Webhook transformed to canonical event format
+4. **Stored Event**: Canonical event wrapped in stored event envelope
+5. **Routing**: Event routed to configured targets (Teams, SharePoint, etc.)
 
 ## Versioning
 
