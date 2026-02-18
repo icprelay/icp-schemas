@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://icp-relay.io/schemas/canonical-event.schema.json",
+  "$id": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.0/schemas/events/v1/canonical-event.schema.json",
   "title": "ICP Relay CanonicalEvent",
   "type": "object",
   "additionalProperties": false,
@@ -16,43 +16,44 @@
     "schemaVersion": {
       "type": "string",
       "description": "Schema version for this canonical event (e.g., \"1.0\")",
-      "examples": ["1.0"]
+      "examples": [
+        "1.0"
+      ]
     },
-
     "eventId": {
       "type": "string",
       "format": "uuid"
     },
-
     "correlationId": {
       "type": "string",
       "maxLength": 128
     },
-
     "source": {
       "type": "string",
       "maxLength": 64
     },
-
     "eventType": {
       "type": "string",
       "maxLength": 128
     },
-
     "subject": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "type": { "type": "string", "maxLength": 64 },
-        "id": { "type": "string", "maxLength": 256 }
+        "type": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 256
+        }
       }
     },
-
     "occurredAtUtc": {
       "type": "string",
       "format": "date-time"
     },
-
     "data": {
       "type": "object",
       "additionalProperties": true
