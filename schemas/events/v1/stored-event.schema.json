@@ -16,6 +16,11 @@
         "description": "Schema version for this stored envelope (e.g., '1.0').",
         "examples": ["1.0"]
       },
+      "idempotencyKey": {
+        "type":"string",
+        "description": "Idempotency key for preventing duplicate requests.",
+        "maxLength": 256
+      },
       "correlationId": {
         "type": "string",
         "description": "Optional correlation identifier for tracing across systems.",
@@ -59,7 +64,7 @@
             "description": "Reference to raw payload stored in blob (e.g., 'blob://...').",
             "maxLength": 2048
           },
-          "hashSha256": {
+          "hashMd5": {
             "type": "string",
             "description": "Optional SHA-256 hash of the raw payload (hex)."
           },
