@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.0/schemas/events/v1/record-data.schema.json",
+  "$id": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.1/schemas/events/v1/record-data.schema.json",
   "title": "ICP Relay RecordData",
   "type": "object",
   "additionalProperties": false,

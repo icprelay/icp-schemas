@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.0/schemas/events/v1/stored-event.schema.json",
+  "$id": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.1/schemas/events/v1/stored-event.schema.json",
   "title": "ICP Relay StoredEvent (Envelope)",
   "type": "object",
   "additionalProperties": false,
@@ -191,7 +191,7 @@
     },
     "canonical": {
       "description": "Canonical event representation conforming to the ICP Relay CanonicalEvent schema.",
-      "$ref": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.0/schemas/events/v1/canonical-event.schema.json"
+      "$ref": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.1/schemas/events/v1/canonical-event.schema.json"
     },
     "status": {
       "type": "string",
