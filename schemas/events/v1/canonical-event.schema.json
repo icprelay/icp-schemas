@@ -7,7 +7,7 @@
   "required": [
     "schemaVersion",
     "eventId",
-    "source",
+    "correlationId",
     "eventType",
     "occurredAtUtc",
     "data"
@@ -28,35 +28,17 @@
       "type": "string",
       "maxLength": 128
     },
-    "source": {
-      "type": "string",
-      "maxLength": 64
-    },
     "eventType": {
       "type": "string",
       "maxLength": 128
-    },
-    "subject": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "type": {
-          "type": "string",
-          "maxLength": 64
-        },
-        "id": {
-          "type": "string",
-          "maxLength": 256
-        }
-      }
     },
     "occurredAtUtc": {
       "type": "string",
       "format": "date-time"
     },
     "data": {
-      "type": "object",
-      "additionalProperties": true
+      "description": "RecordData - a generic, source-agnostic record payload for targets",
+      "$ref": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.0/schemas/events/v1/record-data.schema.json"
     }
   }
 }

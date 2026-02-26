@@ -18,7 +18,6 @@
         "jira.issue.updated.v1"
       ]
     },
-
     "primary": {
       "type": "object",
       "additionalProperties": false,

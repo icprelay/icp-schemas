@@ -15,6 +15,11 @@
           "description": "Stored event envelope schema with persistence and routing metadata",
           "path": "./events/v1/stored-event.schema.json",
           "version": "1.0.0"
+        },
+        "record-data": {
+          "description": "Source-agnostic record entity snapshot",
+          "path": "./events/v1/record-data.schema.json",
+          "version": "1.0.0"
         }
       }
     }
