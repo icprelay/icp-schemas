@@ -10,16 +10,50 @@
     "correlationId",
     "source",
     "receivedAtUtc",
-    "storage",
-    "routing",
     "idempotency",
-    "raw",
+    "routing",
     "status"
   ],
   "properties": {
     "schemaVersion": {
       "type": "string",
       "description": "Schema version for this stored envelope (e.g., '1.0')."
+    },
+    "executionMode": {
+      "type": "string",
+      "enum": [
+        "event",
+        "job"
+      ],
+      "description": "Execution mode. If omitted, treated as 'event' for backward compatibility."
+    },
+    "operation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "description": "Present only when executionMode='job'. Describes the operation to execute.",
+      "required": [
+        "type",
+        "initiator"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "initiator": {
+          "type":"string",
+          "enum": [
+            "manual",
+            "scheduled"
+          ]
+        },
+        "parameters": {
+          "type": "object"
+        }
+      }
     },
     "eventId": {
       "type": "string",
@@ -68,7 +102,10 @@
       "format": "date-time"
     },
     "storage": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
       "required": [
         "prefix",
@@ -105,12 +142,12 @@
       "properties": {
         "tenantKey": {
           "type": "string",
-          "description": "Business routing key, typically 'source:tenant' (e.g., 'falcony:company-0'). Used for Service Bus properties and idempotency PK scope.",
+          "description": "Business routing key, typically 'source:tenant' (e.g., 'falcony:company-0'). User for Db and idempotency PK scope.",
           "maxLength": 128
         },
         "eventType": {
           "type": "string",
-          "description": "Raw source event type (e.g., 'observation', 'smoke').",
+          "description": "Raw source event/job type. (EventType in ICP)",
           "maxLength": 128
         },
         "subject": {
@@ -166,7 +203,10 @@
       }
     },
     "raw": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
       "required": [
         "payloadRef"
@@ -191,17 +231,30 @@
     },
     "canonical": {
       "description": "Canonical event representation conforming to the ICP Relay CanonicalEvent schema.",
-      "$ref": "./canonical-event.schema.json"
+      "anyOf": [
+        {
+          "$ref": "./canonical-event.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "status": {
       "type": "string",
-      "enum": ["received", "canonicalized", "failed", "unknown", "ignored"],
+      "enum": [
+        "received",
+        "canonicalized",
+        "failed",
+        "unknown",
+        "ignored"
+      ],
       "description": "Processing status of the payload"
     },
     "errors": {
       "type": "array",
       "description": "Optional list of errors (for failed/unknown cases).",
-      "default":[],
+      "default": [],
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -231,7 +284,7 @@
     "links": {
       "type": "array",
       "description": "Optional URLs to open the original entity in the source system.",
-      "default":[],
+      "default": [],
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -254,7 +307,7 @@
     "tags": {
       "type": "array",
       "description": "Optional tags for filtering and grouping.",
-      "default":[],
+      "default": [],
       "items": {
         "type": "string",
         "minLength": 1,
@@ -263,5 +316,39 @@
       "maxItems": 64,
       "uniqueItems": true
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "executionMode": {
+            "const": "job"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "operation"
+        ],
+        "properties": {
+          "raw": {
+            "type": [
+              "null"
+            ]
+          },
+          "canonical": {
+            "type": [
+              "null"
+            ]
+          }
+        }
+      },
+      "else": {
+        "required": [
+          "raw",
+          "storage"
+        ]
+      }
+    }
+  ]
 }
