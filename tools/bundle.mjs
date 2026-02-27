@@ -3,9 +3,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const inputs = [
-  "schemas/events/v1/stored-event.schema.json",
-  "schemas/events/v1/canonical-event.schema.json",
-  "schemas/events/v1/record-data.schema.json"
+  "schemas/v1/stored-event.schema.json",
+  "schemas/v1/canonical-event.schema.json",
+  "schemas/v1/record-data.schema.json"
 ];
 
 const outDir = "schemas/bundles/generated";
