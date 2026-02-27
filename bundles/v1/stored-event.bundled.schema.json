@@ -234,7 +234,10 @@
         {
           "$schema": "http://json-schema.org/draft-07/schema#",
           "title": "ICP Relay CanonicalEvent",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "additionalProperties": false,
           "required": [
             "schemaVersion",
@@ -272,7 +275,10 @@
               "description": "RecordData - a generic, source-agnostic record payload for targets",
               "$schema": "http://json-schema.org/draft-07/schema#",
               "title": "ICP Relay RecordData",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "additionalProperties": false,
               "required": [
                 "dataSchemaId",
