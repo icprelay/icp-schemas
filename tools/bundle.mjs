@@ -8,24 +8,32 @@ const inputs = [
   "schemas/v1/record-data.schema.json"
 ];
 
-const outDir = "schemas/bundles/generated";
-
 function stripIds(obj) {
   if (!obj || typeof obj !== "object") return;
   if (Object.prototype.hasOwnProperty.call(obj, "$id")) delete obj.$id;
   for (const v of Object.values(obj)) stripIds(v);
 }
 
-await fs.mkdir(outDir, { recursive: true });
+const createdDirs = new Set();
 
 for (const input of inputs) {
+  const parts = input.split("/");
+  const version = parts[1]; // e.g. "v1"
+  if (!version) throw new Error(`Cannot determine version from input path: ${input}`);
+  const outDir = path.join("bundles", version);
+
+  if (!createdDirs.has(outDir)) {
+    await fs.mkdir(outDir, { recursive: true });
+    createdDirs.add(outDir);
+  }
+
   const base = path.basename(input).replace(".schema.json", ".bundled.schema.json");
   const output = path.join(outDir, base);
 
   const bundled = await $RefParser.bundle(input, {
     dereference: { circular: "ignore" }
   });
-  
+
   stripIds(bundled);
 
   await fs.writeFile(output, JSON.stringify(bundled, null, 2), "utf8");
