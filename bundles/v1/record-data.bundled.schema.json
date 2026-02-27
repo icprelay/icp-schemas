@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "ICP Relay RecordData (Bundled)",
+  "title": "ICP Relay RecordData",
   "type": "object",
   "additionalProperties": false,
   "required": [
