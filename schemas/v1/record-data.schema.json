@@ -109,19 +109,54 @@
         "value": {}
       },
       "allOf": [
-        { "if": { "properties": { "type": { "const": "string" } } }, "then": { "properties": { "value": { "type": "string" } } } },
-        { "if": { "properties": { "type": { "const": "number" } } }, "then": { "properties": { "value": { "type": "number" } } } },
-        { "if": { "properties": { "type": { "const": "integer" } } }, "then": { "properties": { "value": { "type": "integer" } } } },
-        { "if": { "properties": { "type": { "const": "boolean" } } }, "then": { "properties": { "value": { "type": "boolean" } } } },
+        {
+          "if": { "properties": { "type": { "const": "string" } } },
+          "then": { "properties": { "value": { "type": ["string", "null"] } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "number" } } },
+          "then": { "properties": { "value": { "type": ["number", "null"] } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "integer" } } },
+          "then": { "properties": { "value": { "type": ["integer", "null"] } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "boolean" } } },
+          "then": { "properties": { "value": { "type": ["boolean", "null"] } } }
+        },
         {
           "if": { "properties": { "type": { "const": "datetime" } } },
-          "then": { "properties": { "value": { "type": "string", "format": "date-time" } } }
+          "then": {
+            "properties": {
+              "value": {
+                "type": ["string", "null"],
+                "format": "date-time"
+              }
+            }
+          }
         },
         {
           "if": { "properties": { "type": { "const": "date" } } },
-          "then": { "properties": { "value": { "type": "string", "format": "date" } } }
+          "then": {
+            "properties": {
+              "value": {
+                "type": ["string", "null"],
+                "format": "date"
+              }
+            }
+          }
         },
-        { "if": { "properties": { "type": { "const": "json" } } }, "then": { "properties": { "value": {} } } }
+        {
+          "if": { "properties": { "type": { "const": "json" } } },
+          "then": {
+            "properties": {
+              "value": {
+                "type": ["object", "array", "string", "number", "integer", "boolean", "null"]
+              }
+            }
+          }
+        }
       ]
     },
 
@@ -191,19 +226,54 @@
         }
       },
       "allOf": [
-        { "if": { "properties": { "type": { "const": "string" } } }, "then": { "properties": { "value": { "type": "string" } } } },
-        { "if": { "properties": { "type": { "const": "number" } } }, "then": { "properties": { "value": { "type": "number" } } } },
-        { "if": { "properties": { "type": { "const": "integer" } } }, "then": { "properties": { "value": { "type": "integer" } } } },
-        { "if": { "properties": { "type": { "const": "boolean" } } }, "then": { "properties": { "value": { "type": "boolean" } } } },
+        {
+          "if": { "properties": { "type": { "const": "string" } } },
+          "then": { "properties": { "value": { "type": ["string", "null"] } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "number" } } },
+          "then": { "properties": { "value": { "type": ["number", "null"] } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "integer" } } },
+          "then": { "properties": { "value": { "type": ["integer", "null"] } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "boolean" } } },
+          "then": { "properties": { "value": { "type": ["boolean", "null"] } } }
+        },
         {
           "if": { "properties": { "type": { "const": "datetime" } } },
-          "then": { "properties": { "value": { "type": "string", "format": "date-time" } } }
+          "then": {
+            "properties": {
+              "value": {
+                "type": ["string", "null"],
+                "format": "date-time"
+              }
+            }
+          }
         },
         {
           "if": { "properties": { "type": { "const": "date" } } },
-          "then": { "properties": { "value": { "type": "string", "format": "date" } } }
+          "then": {
+            "properties": {
+              "value": {
+                "type": ["string", "null"],
+                "format": "date"
+              }
+            }
+          }
         },
-        { "if": { "properties": { "type": { "const": "json" } } }, "then": { "properties": { "value": {} } } }
+        {
+          "if": { "properties": { "type": { "const": "json" } } },
+          "then": {
+            "properties": {
+              "value": {
+                "type": ["object", "array", "string", "number", "integer", "boolean", "null"]
+              }
+            }
+          }
+        }
       ]
     },
 

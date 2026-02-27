@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/icprelay/icp-schemas/v1.0.1/schemas/events/v1/canonical-event.schema.json",
+  "title": "ICP Relay CanonicalEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "correlationId",
+    "eventType",
+    "occurredAtUtc",
+    "data"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "description": "Schema version for this canonical event (e.g., \"1.0\")",
+      "examples": [
+        "1.0"
+      ]
+    },
+    "eventId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "correlationId": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "eventType": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "occurredAtUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data": {
+      "description": "RecordData - a generic, source-agnostic record payload for targets",
+      "$ref": "./record-data.schema.json"
+    }
+  }
+}
