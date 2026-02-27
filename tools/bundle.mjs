@@ -8,7 +8,7 @@ const inputs = [
   "schema/events/v1/record-data.schema.json"
 ];
 
-const outDir = "schema/bundles/generated";
+const outDir = "schemas/bundles/generated";
 
 function stripIds(obj) {
   if (!obj || typeof obj !== "object") return;
