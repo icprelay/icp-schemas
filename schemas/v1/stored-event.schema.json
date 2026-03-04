@@ -230,14 +230,7 @@
     },
     "canonical": {
       "description": "Canonical event representation conforming to the ICP Relay CanonicalEvent schema.",
-      "anyOf": [
-        {
-          "$ref": "./canonical-event.schema.json"
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "$ref": "./canonical-event.schema.json"
     },
     "status": {
       "type": "string",
