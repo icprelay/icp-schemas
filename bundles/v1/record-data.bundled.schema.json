@@ -61,6 +61,20 @@
           ],
           "maxLength": 512
         },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "link": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
         "revision": {
           "type": [
             "string",
