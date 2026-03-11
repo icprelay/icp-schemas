@@ -23,7 +23,7 @@ icprelay-schemas/
       └── stored-event.sample.json
 ``` 
  
-## Schemas
+## Schemas 
 
 ### Canonical Event (`canonical-event.schema.json`)
 
