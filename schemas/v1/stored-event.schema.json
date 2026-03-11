@@ -73,7 +73,7 @@
       "properties": {
         "system": {
           "type": "string",
-          "description": "Source system identifier (e.g., 'falcony', 'jira').",
+          "description": "Source system identifier (e.g., 'example', 'jira').",
           "minLength": 1,
           "maxLength": 64
         },
@@ -141,7 +141,7 @@
       "properties": {
         "tenantKey": {
           "type": "string",
-          "description": "Business routing key, typically 'source:tenant' (e.g., 'falcony:company-0'). User for Db and idempotency PK scope.",
+          "description": "Business routing key, typically 'source:tenant' (e.g., 'example:company-0'). User for Db and idempotency PK scope.",
           "maxLength": 128
         },
         "eventType": {

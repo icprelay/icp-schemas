@@ -31,7 +31,7 @@ Defines the standard structure for ICP Relay canonical events. This schema inclu
 - **schemaVersion**: Schema version (e.g., "1.0")
 - **eventId**: Unique identifier (UUID format)
 - **correlationId**: Optional correlation identifier for tracing
-- **source**: Source system identifier (e.g., "falcony", "jira")
+- **source**: Source system identifier (e.g., "example", "jira")
 - **eventType**: Type of event (e.g., `observation.created`, `issue.updated`)
 - **subject**: Optional subject information (type and id)
 - **occurredAtUtc**: ISO 8601 timestamp when the event occurred
@@ -73,7 +73,7 @@ with open('schemas/events/v1/canonical-event.schema.json') as f:
 event = {
     "schemaVersion": "1.0",
     "eventId": "550e8400-e29b-41d4-a716-446655440000",
-    "source": "falcony",
+    "source": "example",
     "eventType": "observation.created",
     "occurredAtUtc": "2024-01-15T14:30:00.000Z",
     "data": {}
@@ -85,7 +85,7 @@ validate(instance=event, schema=schema)
 ### Sample Files
 
 Sample files are provided in the `samples/` directory to demonstrate valid event structures:
-- `canonical-event.sample.json`: Example of a canonical event from Falcony
+- `canonical-event.sample.json`: Example of a canonical event from example
 - `stored-event.sample.json`: Example of a stored event envelope with routing information
 
 ## Event Flow
