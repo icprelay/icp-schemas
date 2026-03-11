@@ -107,16 +107,16 @@
       ],
       "additionalProperties": false,
       "required": [
-        "prefix",
+        "blobName",
         "rawContainer",
         "storedContainer"
       ],
-      "description": "Storage layout info (blob prefix etc.). Not used for routing.",
+      "description": "Storage layout info.",
       "properties": {
-        "prefix": {
+        "blobName": {
           "type": "string",
-          "description": "Blob prefix used to group blobs (often time-based).",
-          "maxLength": 256
+          "description": "Blob name.",
+          "maxLength": 1024
         },
         "rawContainer": {
           "type": "string",
